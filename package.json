@@ -9,11 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@paunovic/random-words": "^1.2.1",
     "axios": "^0.27.2",
     "next": "12.2.0",
     "prettier": "^2.7.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "sass": "^1.53.0",
     "scss": "^0.2.4",
     "spinners-react": "^1.0.7"
   },
