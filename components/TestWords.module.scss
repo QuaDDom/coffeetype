@@ -1,20 +1,23 @@
 .containerWords {
     width: 80vw;
     min-height: 300px;
-    .words {
-        height: 110px;
-        overflow-y: hidden;
-        .word {
-            display: inline-block;
-            font-size: 1.4em;
-            margin: 0 5px;
-            .letter {
-                line-height: 20px;
-                &.incorrect {
-                    color: #ff6767;
-                }
-                &.correct {
-                    color: #67ff67;
+    .game {
+        position: relative;
+        .words {
+            height: 110px;
+            overflow-y: hidden;
+            .word {
+                display: inline-block;
+                font-size: 1.4em;
+                margin: 0 5px;
+                .letter {
+                    line-height: 20px;
+                    &.incorrect {
+                        color: #ff6767;
+                    }
+                    &.correct {
+                        color: #67ff67;
+                    }
                 }
             }
         }

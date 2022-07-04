@@ -6,23 +6,34 @@ export default function TestWords() {
     const [time, setTime] = useState(0);
     const [mistakes, setMistakes] = useState(0);
     const [speed, setSpeed] = useState(0);
-    const [textState, setTextState] = useState(['']);
+    const [currentLetter, setCurrentLetter] = useState('');
 
     //References
-    const gameRef = useRef<HTMLDivElement>(null) as MutableRefObject<HTMLDivElement>;
+    const gameRef = useRef<HTMLInputElement>(null) as MutableRefObject<HTMLInputElement>;
     const wordRef = useRef<HTMLDivElement>(null) as MutableRefObject<HTMLDivElement>;
+    const letterRef = useRef<HTMLSpanElement>(null) as MutableRefObject<HTMLSpanElement>;
+
+    const addClass = (el: any, name: any) => {};
+    const removeClass = () => {};
+
+    const evaluateWord = (word: string) => {};
+
+    const handleKeyUp = (e: any) => {
+        const key = e.key;
+
+        const correct = false;
+        const isLetter = key.length === 1 && key !== ' ';
+
+        if (isLetter) {
+        }
+    };
 
     useEffect(() => {
-        gameRef?.current.addEventListener('keyup', (letter: any) => {
-            console.log(letter.key);
-        });
-    }, []);
+        gameRef?.current.focus();
+        console.log(wordRef?.current);
+    }, [gameRef, wordRef, letterRef]);
 
     const text: [string] = useNewGame();
-
-    useEffect(() => {
-        setTextState(text);
-    }, [text]);
 
     return (
         <div className={styles.containerWords}>
@@ -33,13 +44,16 @@ export default function TestWords() {
                 </p>
                 <p>Mistakes: {mistakes}</p>
             </div>
-            <div className={styles.game} ref={gameRef}>
+            <div className={styles.game} onKeyUp={handleKeyUp} ref={gameRef} tabIndex={0}>
                 <div className={styles.words}>
-                    {textState &&
-                        textState.map((word: string, index) => (
+                    {text &&
+                        text.map((word: string, index) => (
                             <div className={styles.word} key={word + index} ref={wordRef}>
                                 {word.split('').map((letter: string, index: number) => (
-                                    <span className={styles.letter} key={letter + index}>
+                                    <span
+                                        className={styles.letter}
+                                        key={letter + index}
+                                        ref={letterRef}>
                                         {letter}
                                     </span>
                                 ))}
