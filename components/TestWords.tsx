@@ -3,13 +3,12 @@ import { useNewGame } from '../hooks/useNewGame';
 import styles from './TestWords.module.scss';
 
 export default function TestWords() {
-    const [time, setTime] = useState(0);
+    const [time, setTime] = useState(30);
     const [mistakes, setMistakes] = useState(0);
     const [speed, setSpeed] = useState(0);
+    const [charIndex, setCharIndex] = useState(0);
+    const [wordIndex, setWordIndex] = useState(0);
     const [currentLetter, setCurrentLetter] = useState('');
-
-    let charIndex = 0;
-    let wordIndex = 0;
 
     //References
     const gameRef = useRef<HTMLInputElement>(null) as MutableRefObject<HTMLInputElement>;
@@ -38,8 +37,10 @@ export default function TestWords() {
         const isLetter = letter.length === 1 && letter !== ' ';
 
         if (letter === ' ') {
-            wordIndex++;
+            setWordIndex(wordIndex + 1);
             return;
+        } else if (letter === 'Backspace') {
+            if (wordIndex >= 1) setWordIndex(wordIndex - 1);
         }
 
         if (isLetter) {
@@ -61,14 +62,15 @@ export default function TestWords() {
         }
 
         currentIndex++;
-        charIndex++;
+        setCharIndex(charIndex + 1);
+        letterDom[charIndex].classList.add(styles.active);
     };
 
     useEffect(() => {
         gameRef.current.focus();
     }, [gameRef, wordRef, letterRef]);
 
-    const text: [string] = useNewGame();
+    const text: [string] = useNewGame({ setTime, setCharIndex, setWordIndex });
 
     return (
         <div className={styles.containerWords}>
@@ -97,7 +99,8 @@ export default function TestWords() {
                     className={styles.cursor}
                     style={{
                         position: 'absolute',
-                        left: charIndex >= 1 ? charIndex * 10 : '3px'
+                        // top: charIndex >= 2 ? wordIndex * 30 + 'px' : '55px',
+                        left: charIndex >= 1 ? charIndex * 17.5 + 'px' : '3px'
                     }}></div>
             </div>
         </div>

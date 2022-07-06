@@ -35,6 +35,7 @@
             background: var(--hl-color);
             position: absolute;
             border-radius: 4px;
+            transition: 0.2s;
             top: 55px;
             left: 3px;
             animation: cursorAnimation 0.7s infinite linear;
@@ -55,17 +56,21 @@
                 align-items: center;
                 justify-content: center;
                 color: var(--bg-color);
-                filter: brightness(5);
                 font-weight: 500;
                 .letter {
                     transition: color 0.2s;
                     margin: 0 0.8px;
-                }
-                .letter.incorrect {
-                    color: #ff6767 !important;
-                }
-                .letter.correct {
-                    color: var(--font-color);
+                    filter: brightness(5);
+                    &.incorrect {
+                        filter: brightness(1);
+                        color: #ff6767 !important;
+                    }
+                    &.correct {
+                        filter: brightness(1);
+                        color: var(--font-color);
+                    }
+                    &.active {
+                    }
                 }
             }
         }
