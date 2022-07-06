@@ -1,5 +1,6 @@
 import React, { MutableRefObject, useEffect, useRef, useState } from 'react';
 import { useNewGame } from '../hooks/useNewGame';
+import RestartGame from './GameAssets/RestartGame';
 import styles from './TestWords.module.scss';
 
 export default function TestWords() {
@@ -8,6 +9,8 @@ export default function TestWords() {
     const [speed, setSpeed] = useState(0);
     const [charIndex, setCharIndex] = useState(0);
     const [wordIndex, setWordIndex] = useState(0);
+    const [currentCharIndex, setCurrentCharIndex] = useState(0);
+    const [isStart, setIsStart] = useState(false);
     const [currentLetter, setCurrentLetter] = useState('');
 
     //References
@@ -15,62 +18,64 @@ export default function TestWords() {
     const wordRef = useRef<HTMLDivElement>(null) as MutableRefObject<HTMLDivElement>;
     const letterRef = useRef<HTMLSpanElement>(null) as MutableRefObject<HTMLSpanElement>;
 
-    const addClass = (el: any, name: any) => {};
-    const removeClass = () => {};
-
-    const evaluateWord = (word: string) => {
-        const characters = text.map((word: string) => word.split(''));
-    };
-
     const handleKeyUp = (e: any) => {
+        setIsStart(true);
         const letter = e.key;
-        let currentIndex = 0;
 
-        const letterDom = document.getElementsByClassName('letter');
+        const letterDom: any = document.getElementsByClassName('letter');
 
         const characters = text.map((word: string) => word.split(''));
         const word = characters[wordIndex];
 
         console.log(letter);
 
-        const correct = word[charIndex] === letter;
-        const isLetter = letter.length === 1 && letter !== ' ';
+        const correct = word[currentCharIndex] === letter;
+        const isLetter = letter.length === 1 && letter !== ' ' && letter !== 'Backspace';
 
         if (letter === ' ') {
             setWordIndex(wordIndex + 1);
+            setCurrentCharIndex(0);
             return;
         } else if (letter === 'Backspace') {
-            if (wordIndex >= 1) setWordIndex(wordIndex - 1);
-        }
+            setCurrentCharIndex(currentCharIndex - 1);
+            setCharIndex(charIndex - 1);
 
-        if (isLetter) {
+            letterDom[charIndex - 1].classList.remove(styles.correct, styles.incorrect);
+
+            if (letterDom[charIndex].classList.contains(styles.incorrect)) {
+                setMistakes(mistakes - 1);
+            }
+            return;
+        } else if (isLetter) {
+            console.log({ letter, expected: word[currentCharIndex] });
             if (correct) {
                 console.log('correct');
-                if (word.length - 1 < currentIndex) {
-                    currentIndex = 0;
+                if (word.length - 1 < currentCharIndex) {
+                    setCurrentCharIndex(0);
                     return;
                 }
                 letterDom[charIndex].classList.add(styles.correct);
             } else {
+                setMistakes(mistakes + 1);
                 console.log('incorrect');
-                if (word.length - 1 < currentIndex) {
-                    currentIndex = 0;
-                    return;
-                }
                 letterDom[charIndex].classList.add(styles.incorrect);
             }
+            setCurrentCharIndex(currentCharIndex + 1);
+            setCharIndex(charIndex + 1);
         }
-
-        currentIndex++;
-        setCharIndex(charIndex + 1);
-        letterDom[charIndex].classList.add(styles.active);
     };
 
     useEffect(() => {
         gameRef.current.focus();
     }, [gameRef, wordRef, letterRef]);
 
-    const { text, startNewGame }: any = useNewGame({ setTime, setCharIndex, setWordIndex });
+    const { text, startNewGame }: any = useNewGame({
+        setTime,
+        setCharIndex,
+        setWordIndex,
+        setCurrentCharIndex,
+        setMistakes
+    });
 
     return (
         <div className={styles.containerWords}>
@@ -99,10 +104,11 @@ export default function TestWords() {
                     className={styles.cursor}
                     style={{
                         position: 'absolute',
-                        // top: charIndex >= 2 ? wordIndex * 30 + 'px' : '55px',
-                        left: charIndex >= 1 ? charIndex * 17.5 + 'px' : '3px'
+                        top: wordIndex >= 2 ? wordIndex * 30 + 'px' : '55px',
+                        left: charIndex >= 1 ? charIndex * 17 + 'px' : '3px'
                     }}></div>
             </div>
+            <RestartGame startNewGame={startNewGame} />
         </div>
     );
 }

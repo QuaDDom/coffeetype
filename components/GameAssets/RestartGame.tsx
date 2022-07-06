@@ -1,13 +1,17 @@
 import React from 'react';
 import styles from './RestartGame.module.scss';
-import { VscDebugRestart } from 'react-icons/vsc';
+import { IoReload } from 'react-icons/io5';
 
-export default function RestartGame() {
+interface Props {
+    startNewGame: () => void;
+}
+
+export default function RestartGame({ startNewGame }: Props) {
     return (
         <div className={styles.restartGameContainer}>
-            <div className={styles.button}>
+            <div className={styles.button} onClick={startNewGame}>
                 <span>
-                    <VscDebugRestart />
+                    <IoReload />
                 </span>
             </div>
         </div>

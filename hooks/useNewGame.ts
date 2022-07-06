@@ -7,15 +7,25 @@ interface Props {
     setTime: any;
     setCharIndex: any;
     setWordIndex: any;
+    setCurrentCharIndex: any;
+    setMistakes: any;
 }
 
-export const useNewGame = ({ setTime, setCharIndex, setWordIndex }: Props) => {
+export const useNewGame = ({
+    setTime,
+    setCharIndex,
+    setWordIndex,
+    setCurrentCharIndex,
+    setMistakes
+}: Props) => {
     const [text, setText] = useState<any>([]);
 
     const startNewGame = () => {
         setTime(0);
         setCharIndex(0);
         setWordIndex(0);
+        setCurrentCharIndex(0);
+        setMistakes(0);
         setText(textGen.words(200));
     };
 

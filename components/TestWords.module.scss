@@ -5,17 +5,16 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    position: relative;
     .stats {
         width: 65vw;
         display: flex;
-        justify-content: space-between;
         font-size: 1.6em;
-        align-items: flex-end;
-        padding: 0 5px;
         position: absolute;
         margin-bottom: 170px;
         p {
             color: var(--font-color);
+            padding-left: 10px;
         }
     }
     .game {
@@ -55,12 +54,12 @@
                 display: inline-flex;
                 align-items: center;
                 justify-content: center;
-                color: var(--bg-color);
-                font-weight: 500;
+                color: var(--font-color);
+                font-weight: 400;
                 .letter {
                     transition: color 0.2s;
                     margin: 0 0.8px;
-                    filter: brightness(5);
+                    filter: brightness(0.5);
                     &.incorrect {
                         filter: brightness(1);
                         color: #ff6767 !important;
