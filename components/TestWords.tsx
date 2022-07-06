@@ -8,6 +8,9 @@ export default function TestWords() {
     const [speed, setSpeed] = useState(0);
     const [currentLetter, setCurrentLetter] = useState('');
 
+    let charIndex = 0;
+    let wordIndex = 0;
+
     //References
     const gameRef = useRef<HTMLInputElement>(null) as MutableRefObject<HTMLInputElement>;
     const wordRef = useRef<HTMLDivElement>(null) as MutableRefObject<HTMLDivElement>;
@@ -16,21 +19,53 @@ export default function TestWords() {
     const addClass = (el: any, name: any) => {};
     const removeClass = () => {};
 
-    const evaluateWord = (word: string) => {};
+    const evaluateWord = (word: string) => {
+        const characters = text.map((word) => word.split(''));
+    };
 
     const handleKeyUp = (e: any) => {
-        const key = e.key;
+        const letter = e.key;
+        let currentIndex = 0;
 
-        const correct = false;
-        const isLetter = key.length === 1 && key !== ' ';
+        const letterDom = document.getElementsByClassName('letter');
+
+        const characters = text.map((word) => word.split(''));
+        const word = characters[wordIndex];
+
+        console.log(letter);
+
+        const correct = word[charIndex] === letter;
+        const isLetter = letter.length === 1 && letter !== ' ';
+
+        if (letter === ' ') {
+            wordIndex++;
+            return;
+        }
 
         if (isLetter) {
+            if (correct) {
+                console.log('correct');
+                if (word.length - 1 < currentIndex) {
+                    currentIndex = 0;
+                    return;
+                }
+                letterDom[charIndex].classList.add(styles.correct);
+            } else {
+                console.log('incorrect');
+                if (word.length - 1 < currentIndex) {
+                    currentIndex = 0;
+                    return;
+                }
+                letterDom[charIndex].classList.add(styles.incorrect);
+            }
         }
+
+        currentIndex++;
+        charIndex++;
     };
 
     useEffect(() => {
-        gameRef?.current.focus();
-        console.log(wordRef?.current);
+        gameRef.current.focus();
     }, [gameRef, wordRef, letterRef]);
 
     const text: [string] = useNewGame();
@@ -38,10 +73,8 @@ export default function TestWords() {
     return (
         <div className={styles.containerWords}>
             <div className={styles.stats}>
-                <p>{speed}</p>
-                <p>
-                    Time: <span>{time}s</span>
-                </p>
+                <p>{time}</p>
+                <p>WPM: {speed}</p>
                 <p>Mistakes: {mistakes}</p>
             </div>
             <div className={styles.game} onKeyUp={handleKeyUp} ref={gameRef} tabIndex={0}>
@@ -51,7 +84,7 @@ export default function TestWords() {
                             <div className={styles.word} key={word + index} ref={wordRef}>
                                 {word.split('').map((letter: string, index: number) => (
                                     <span
-                                        className={styles.letter}
+                                        className={`${styles.letter} letter`}
                                         key={letter + index}
                                         ref={letterRef}>
                                         {letter}
@@ -60,7 +93,12 @@ export default function TestWords() {
                             </div>
                         ))}
                 </div>
-                <div className={styles.cursor}></div>
+                <div
+                    className={styles.cursor}
+                    style={{
+                        position: 'absolute',
+                        left: charIndex >= 1 ? charIndex * 10 : '3px'
+                    }}></div>
             </div>
         </div>
     );

@@ -1,5 +1,7 @@
 @import url('http://fonts.cdnfonts.com/css/cascadia-code');
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600&display=swap');
+@import url('http://fonts.cdnfonts.com/css/aqua-grotesque');
+@import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
 
 * {
     margin: 0;
@@ -13,6 +15,7 @@ body {
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell,
         Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    background: var(--bg-color);
 }
 
 a {
@@ -22,4 +25,68 @@ a {
 
 * {
     box-sizing: border-box;
+}
+
+.coffee {
+    --bg-color: #1d2021 !important;
+    --font-color: #ebdbb2 !important;
+    --hl-color: #cc241d !important;
+    --fg-color: #444444 !important;
+    --main-color: #d79921 !important;
+}
+
+.mkbhd {
+    --bg-color: #171717 !important;
+    --font-color: #ededed !important;
+    --hl-color: #da0037 !important;
+    --fg-color: #444444 !important;
+}
+
+.mocha {
+    --bg-color: #2d2424 !important;
+    --font-color: #e0c097 !important;
+    --hl-color: #dc521c !important;
+    --fg-color: #5c3d2e !important;
+}
+
+.coral {
+    --bg-color: #fdd2bf !important;
+    --font-color: #df5e5e !important;
+    --hl-color: #492f10 !important;
+    --fg-color: #e98580 !important;
+}
+
+.ocean {
+    --bg-color: #dddddd !important;
+    --font-color: #125d98 !important;
+    --hl-color: #f5a962 !important;
+    --fg-color: #3c8dad !important;
+}
+
+.azure {
+    --bg-color: #383e56 !important;
+    --font-color: #eedad1 !important;
+    --hl-color: #f69e7b !important;
+    --fg-color: #d4b5b0 !important;
+}
+
+.forest {
+    --bg-color: #334443 !important;
+    --font-color: #fff8df !important;
+    --hl-color: #c6ffc1 !important;
+    --fg-color: #34656d !important;
+}
+
+.rose-milk {
+    --bg-color: #ffffff !important;
+    --font-color: #111111 !important;
+    --hl-color: #b33838 !important;
+    --fg-color: #3b8792 !important;
+}
+
+.amethyst {
+    --bg-color: #e2caea !important;
+    --font-color: #480c51 !important;
+    --hl-color: #ab395f !important;
+    --fg-color: #9774aa !important;
 }

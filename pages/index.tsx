@@ -1,15 +1,17 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
-import TestWords from '../components/TestWords'
-import styles from '../styles/Home.module.css'
+import type { NextPage } from 'next';
+import Head from 'next/head';
+import Image from 'next/image';
+import Nav from '../components/Page/Nav';
+import TestWords from '../components/TestWords';
+import styles from '../styles/index.module.scss';
 
 const Home: NextPage = () => {
-  return (
-    <div className={styles.container}>
-      <TestWords/>
-    </div>
-  )
-}
+    return (
+        <div className={`${styles.container} mkbhd`}>
+            <Nav />
+            <TestWords />
+        </div>
+    );
+};
 
-export default Home
+export default Home;

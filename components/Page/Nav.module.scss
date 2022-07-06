@@ -1,0 +1,33 @@
+.navContainer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 120px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    .navigation {
+        width: 65vw;
+    }
+    .logo {
+        display: flex;
+        align-items: center;
+        img {
+            width: 52px;
+            height: 52px;
+            padding-right: 10px;
+        }
+        h1 {
+            font-family: 'Questrial', sans-serif;
+            font-weight: 600;
+            font-size: 2.2em;
+            color: var(--font-color);
+            transition: 0.3s;
+            cursor: pointer;
+            &:hover {
+                filter: brightness(1.5);
+            }
+        }
+    }
+}

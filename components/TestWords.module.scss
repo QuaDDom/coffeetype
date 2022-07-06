@@ -1,25 +1,85 @@
 .containerWords {
-    width: 80vw;
-    min-height: 300px;
+    width: 100%;
+    height: 85vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    .stats {
+        width: 65vw;
+        display: flex;
+        justify-content: space-between;
+        font-size: 1.6em;
+        align-items: flex-end;
+        padding: 0 5px;
+        position: absolute;
+        margin-bottom: 170px;
+        p {
+            color: var(--font-color);
+        }
+    }
     .game {
         position: relative;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        border: none;
+        outline: none;
+        max-width: 65vw;
+        height: 225px;
+        .cursor {
+            width: 2.8px;
+            height: 2rem;
+            background: var(--hl-color);
+            position: absolute;
+            border-radius: 4px;
+            top: 55px;
+            left: 3px;
+            animation: cursorAnimation 0.7s infinite linear;
+        }
         .words {
-            height: 110px;
+            max-width: 65vw;
+            height: 125px;
             overflow-y: hidden;
+            user-select: none;
+            cursor: text;
             .word {
                 display: inline-block;
-                font-size: 1.4em;
+                font-size: 1.6em;
                 margin: 0 5px;
+                height: 39px;
+                text-align: center;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                color: var(--bg-color);
+                filter: brightness(5);
+                font-weight: 500;
                 .letter {
-                    line-height: 20px;
-                    &.incorrect {
-                        color: #ff6767;
-                    }
-                    &.correct {
-                        color: #67ff67;
-                    }
+                    transition: color 0.2s;
+                    margin: 0 0.8px;
+                }
+                .letter.incorrect {
+                    color: #ff6767 !important;
+                }
+                .letter.correct {
+                    color: var(--font-color);
                 }
             }
         }
+    }
+}
+
+@keyframes cursorAnimation {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
     }
 }
