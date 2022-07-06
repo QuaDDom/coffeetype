@@ -19,7 +19,7 @@ export default function TestWords() {
     const removeClass = () => {};
 
     const evaluateWord = (word: string) => {
-        const characters = text.map((word) => word.split(''));
+        const characters = text.map((word: string) => word.split(''));
     };
 
     const handleKeyUp = (e: any) => {
@@ -28,7 +28,7 @@ export default function TestWords() {
 
         const letterDom = document.getElementsByClassName('letter');
 
-        const characters = text.map((word) => word.split(''));
+        const characters = text.map((word: string) => word.split(''));
         const word = characters[wordIndex];
 
         console.log(letter);
@@ -70,7 +70,7 @@ export default function TestWords() {
         gameRef.current.focus();
     }, [gameRef, wordRef, letterRef]);
 
-    const text: [string] = useNewGame({ setTime, setCharIndex, setWordIndex });
+    const { text, startNewGame }: any = useNewGame({ setTime, setCharIndex, setWordIndex });
 
     return (
         <div className={styles.containerWords}>
@@ -82,7 +82,7 @@ export default function TestWords() {
             <div className={styles.game} onKeyUp={handleKeyUp} ref={gameRef} tabIndex={0}>
                 <div className={styles.words}>
                     {text &&
-                        text.map((word: string, index) => (
+                        text.map((word: string, index: number) => (
                             <div className={styles.word} key={word + index} ref={wordRef}>
                                 {word.split('').map((letter: string, index: number) => (
                                     <span

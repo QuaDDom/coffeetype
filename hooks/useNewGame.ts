@@ -24,5 +24,5 @@ export const useNewGame = ({ setTime, setCharIndex, setWordIndex }: Props) => {
         setText(words);
     }, []);
 
-    return text;
+    return { text, startNewGame };
 };
